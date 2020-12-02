@@ -2,6 +2,7 @@
 # and then multiply those two numbers together.
 def fix_expense_report_2(expenses):
   needed = {}
+
   for expense in expenses:
     num_needed = 2020 - expense
     needed[num_needed] = True
@@ -16,6 +17,12 @@ def fix_expense_report_2(expenses):
 def fix_expense_report_3(expenses):
   needed = {}
   num_expenses = len(expenses)
+
+  # for edge case -- [500, 1020]
+  if num_expenses < 3:
+    print('Not enough expenses')
+    return False
+
   for i in range(num_expenses):
     for j in range(1, num_expenses):
       num_needed = 2020 - expenses[i] - expenses[j]
@@ -25,7 +32,6 @@ def fix_expense_report_3(expenses):
         num1, num2 = needed[expenses[i]]
         print(num1 * num2 * expenses[i])
         return num1 * num2 * expenses[i]
-
 
 fix_expense_report_3([
   1438,

@@ -1,4 +1,3 @@
-
 def read_input_file():
   with open("2_input.txt") as file: 
     for row in file:

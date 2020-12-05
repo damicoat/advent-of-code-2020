@@ -1,56 +1,9 @@
+import re
+
 def read_input_file():
   with open("4_input.txt") as file: 
     for row in file:
       yield row
-
-def num_valid_passports():
-  num_passports = 0
-  record = {}
-
-  for line in read_input_file():
-    if line == "\n":
-      # newline is record delimiter
-      is_valid = is_valid_passport_2(record)
-      if is_valid:
-        num_passports += 1
-      
-      record = {}
-    else:
-      # build up records from rows
-      fields = line.rstrip("\n").split(" ")
-      for field in fields:
-        k_v = field.split(":")
-        record[k_v[0]] = k_v[1]
-  
-  # no newline at EOF means checking final record
-  if is_valid_passport_2(record):
-    num_passports += 1
-
-  print(num_passports)
-  return num_passports
-
-def is_valid_passport(record):
-  required_fields = [
-    'byr',
-    'iyr',
-    'eyr',
-    'hgt',
-    'hcl',
-    'ecl',
-    'pid',
-    # 'cid',
-  ]
-
-  for field in required_fields:
-    if field not in record:
-      return False
-
-  return True
-
-# num_valid_passports()
-
-# part 2
-import re
 
 def is_valid_byr(val):
   val = int(val)
@@ -84,7 +37,7 @@ def is_valid_pid(val):
   pattern = re.compile('^[0-9]{9}$')
   return bool(pattern.match(val))
 
-def is_valid_passport_2(record):
+def is_valid_passport(record):
   required_fields = [
     ['byr', is_valid_byr],
     ['iyr', is_valid_iyr],
@@ -102,5 +55,31 @@ def is_valid_passport_2(record):
       return False
 
   return True
+
+def num_valid_passports():
+  num_passports = 0
+  record = {}
+
+  for line in read_input_file():
+    if line == "\n":
+      # newline is record delimiter
+      is_valid = is_valid_passport(record)
+      if is_valid:
+        num_passports += 1
+      
+      record = {}
+    else:
+      # build up records from rows
+      fields = line.rstrip("\n").split(" ")
+      for field in fields:
+        k_v = field.split(":")
+        record[k_v[0]] = k_v[1]
+  
+  # no newline at EOF means checking final record
+  if is_valid_passport(record):
+    num_passports += 1
+
+  print(num_passports)
+  return num_passports
 
 num_valid_passports()

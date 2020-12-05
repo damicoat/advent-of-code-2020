@@ -56,7 +56,7 @@ def count_trees_2():
   for i, line in enumerate(read_input_file()):
     for path_obj in slopes_arr:
 
-      # when down slope is 2
+      # when down slope is 2, skip odd slopes
       down_val = path_obj["slopes"][1]
       if (down_val != 1 and i % 2 != 0):
         continue

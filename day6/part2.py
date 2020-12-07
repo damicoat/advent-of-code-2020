@@ -15,6 +15,7 @@ def sum_group_everyone_yes():
       first_in_group = True
       yes_per_group = set()
     else:
+      # calculate intersection from person to person in each group
       intersection = set()
 
       for char in line:

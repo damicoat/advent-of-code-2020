@@ -31,17 +31,16 @@ def fix_looping(instructions = get_instructions(), acc = 0, line = 0, trying_lin
           action = 'nop'
           trying_line = line
           before_acc = acc
-      skip_try = False
 
       if action == 'acc':
         acc += curr['amount']
-        line += 1
-      elif action == 'nop':
-        line += 1
       elif action == 'jmp':
-        line += curr['amount']
+        line += curr['amount'] - 1
+      
+      line += 1
+      skip_try = False
 
-  print(acc)
+  print(acc, trying_line)
   return acc
 
 fix_looping()

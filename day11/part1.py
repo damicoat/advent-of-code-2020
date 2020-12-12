@@ -28,7 +28,7 @@ def get_num_occupied_around(grid, i, j):
       if (0 <= i + num < len(grid)) and (0 <= j + num2 < len(grid[i + num])):
         if grid[i + num][j + num2] == '#':
           occupied += 1
-  print('occupied around: ', i, j, occupied)
+          
   return occupied
 
 def simulate_until_static():
@@ -50,10 +50,6 @@ def simulate_until_static():
 
         new_grid[i].append(next_state)
 
-    print(grid)
-    print('\n')
-    print(new_grid)
-    print('\n')
     grid = new_grid
     new_grid = [[] for row in grid]
 
